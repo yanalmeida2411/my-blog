@@ -8,8 +8,8 @@ export const postSchema = z.object({
 
 export type TPostSchema = z.infer<typeof postSchema>;
 
-export type TPosts = {
-  post_id?: number;
+export type TPost = {
+  post_id: number;
   post_title: string;
   post_resume: string;
   post_date: Date;

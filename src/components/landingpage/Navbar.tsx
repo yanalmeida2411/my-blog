@@ -21,7 +21,6 @@ const Navbar = () => {
         <header className="bg-[#00809de7] shadow w-full h-20 fixed top-0 z-50 flex items-center backdrop-blur-sm">
             <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
                 <div className='flex items-center'>
-                    {/* Logo */}
                     <div className="w-15 h-15 flex justify-center">
                         <img
                             src="/world.png"
@@ -32,7 +31,6 @@ const Navbar = () => {
                     <h1 className="text-3xl font-bold text-white">MyBlog</h1>
                 </div>
 
-                {/* Menu */}
                 <nav>
                     <ul className="text-lg hidden md:flex items-center space-x-8 text-white font-bold">
                         {options.map((option) => (

@@ -1,7 +1,8 @@
 'use client'
 
 import { useAuth } from "@/hooks/useAuth"
-import { postSchema, TPosts, TPostSchema } from "@/types/Tposts"
+import { Tfollowers } from "@/types/Tfollowers"
+import { postSchema, TPost, TPostSchema } from "@/types/Tpost"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -10,7 +11,7 @@ import { FaUserCheck } from "react-icons/fa"
 
 export default function Blog() {
     const { userId } = useAuth()
-    const [posts, setPosts] = useState<TPosts[]>([])
+    const [posts, setPosts] = useState<TPost[]>([])
     const [followingIds, setFollowingIds] = useState<number[]>([])
 
     const {
@@ -43,8 +44,8 @@ export default function Blog() {
         if (!userId) return;
         async function fetchFollowing() {
             try {
-                const response = await axios.get(`http://localhost:3001/follows/following/${userId}`, { withCredentials: true })
-                const ids = response.data.map((user: any) => user.userId) // extrai os IDs dos usuários seguidos
+                const response = await axios.get<Tfollowers[]>(`http://localhost:3001/follows/following/${userId}`, { withCredentials: true })
+                const ids = response.data.map((user:Tfollowers) => user.userId) // extrai os IDs dos usuários seguidos
                 setFollowingIds(ids)
             } catch (error) {
                 console.error("Erro ao buscar seguindo:", error)
@@ -119,7 +120,7 @@ export default function Blog() {
                 </button>
             </form>
 
-            {posts.map((post: TPosts) => {
+            {posts.map((post: TPost) => {
                 const isFollowingAuthor = followingIds.includes(post.post_authorId)
                 const isOwnPost = post.post_authorId === userId
 

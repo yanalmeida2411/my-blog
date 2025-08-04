@@ -14,7 +14,7 @@ export default function SeguindoPage() {
     if (!userId) return;
     async function fetchFollowing() {
       try {
-        const response = await axios.get(`http://localhost:3001/follows/following/${userId}`, { withCredentials: true });
+        const response = await axios.get<Tfollowers[]>(`http://localhost:3001/follows/following/${userId}`, { withCredentials: true });
         setFollowing(response.data);
       } catch (error) {
         console.error('Erro ao buscar usuários seguidos:', error)
@@ -26,7 +26,7 @@ export default function SeguindoPage() {
 
   const handleUnfollow = async (followingId: number) => {
     try {
-      await axios.post(
+      await axios.post<Tfollowers[]>(
         "http://localhost:3001/follows/unfollow",
         { following_id: followingId },
         { withCredentials: true }

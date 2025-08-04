@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { TPosts } from '@/types/Tposts'
+import { TPost } from '@/types/Tpost'
 import { useAuth } from '@/hooks/useAuth'
 
 export default function MeusPostsPage() {
-  const [myPosts, setMyPosts] = useState<TPosts[]>([])
+  const [myPosts, setMyPosts] = useState<TPost[]>([])
   const { userId } = useAuth()
 
   const formatting = new Intl.DateTimeFormat('pt-BR');
@@ -24,7 +24,8 @@ export default function MeusPostsPage() {
     fetchPosts()
   }, [userId])
 
-  const handleDeletePost = async (id: number | undefined) => {
+  const handleDeletePost = async (id: number) => {
+    
     try {
       const response = await axios.delete(`http://localhost:3001/posts/${id}`,
         { withCredentials: true })
@@ -41,14 +42,14 @@ export default function MeusPostsPage() {
       {myPosts.length === 0 ? (
         <p className="text-gray-500">Você ainda não publicou nenhum post.</p>
       ) : (
-        myPosts.map((post: TPosts) => (
+        myPosts.map((post: TPost) => (
           <div
             key={post.post_id}
             className="bg-white shadow-md rounded-lg p-6 border border-gray-100 hover:shadow-lg transition"
           >
             <h2 className="text-xl font-semibold text-[#1C1F2A]">{post.post_title}</h2>
             <p className="text-sm text-gray-500 mb-2">
-              Publicado em {post.post_date && formatting.format(new Date(post.post_date))}
+              Publicado em {post.post_date ? formatting.format(new Date(post.post_date)) : 'Data inválida'}
             </p>
             <p className="text-gray-700">{post.post_resume}</p>
             <p className="text-gray-700 mt-5">{post.post_content}</p>
