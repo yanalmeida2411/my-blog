@@ -20,7 +20,6 @@ export default function Login() {
     })
 
     const onSubmit = async (data: TLoginSchema) => {
-        await axios.get("https://my-blog-back-dzcr.onrender.com", { timeout: 30000 })
         // acordar o backend
         try {
             // Axios precisa ter withCredentials para enviar e receber cookies
