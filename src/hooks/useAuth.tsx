@@ -21,7 +21,8 @@ export function useAuth() {
         if (segments[0] === 'blog' && segments.length > 1) {
           const userIdFromUrl = Number(segments[1]);
 
-          if (res.data.userId !== userIdFromUrl && !isNaN(userIdFromUrl)) {
+          if (Number(res.data.userId) !== userIdFromUrl && !isNaN(userIdFromUrl)) {
+
             alert('Acesso negado! Evite tentar acessar páginas pela URL, Você será redirecionado para sua página.');
             router.push(`/blog/${res.data.userId}`);
           }
