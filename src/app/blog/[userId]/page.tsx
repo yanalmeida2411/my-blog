@@ -29,7 +29,7 @@ export default function Blog() {
     useEffect(() => {
         async function fetchPosts() {
             try {
-                const response = await axios.get(`http://localhost:3001/posts/`, { withCredentials: true })
+                const response = await axios.get(`https://my-blog-back-dzcr.onrender.com/posts/`, { withCredentials: true })
                 setPosts(response.data)
             } catch (error) {
                 console.error("Erro ao buscar posts:", error)

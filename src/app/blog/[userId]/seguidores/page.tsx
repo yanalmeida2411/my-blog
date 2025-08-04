@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAuth } from '@/hooks/useAuth'
-import { TPost } from '@/types/Tpost'
 import { Tfollowers } from '@/types/Tfollowers'
 
 export default function SeguidoresPage() {
@@ -15,7 +14,7 @@ export default function SeguidoresPage() {
       try {
 
         const response = await axios.get(
-          `http://localhost:3001/follows/followers/${userId}`,
+          `https://my-blog-back-dzcr.onrender.com/follows/followers/${userId}`,
           {
             withCredentials: true,
           }

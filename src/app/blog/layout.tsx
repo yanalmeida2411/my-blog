@@ -18,7 +18,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:3001/logout", {}, { withCredentials: true });
+            await axios.post("https://my-blog-back-dzcr.onrender.com/logout", {}, { withCredentials: true });
             router.push("/login");
         } catch (err) {
             console.error(err);

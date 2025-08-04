@@ -13,7 +13,7 @@ export default function MeusPostsPage() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await axios.get(`http://localhost:3001/posts/author/${userId}`,
+        const response = await axios.get(`https://my-blog-back-dzcr.onrender.com/${userId}`,
           { withCredentials: true })
         setMyPosts(response.data)
       } catch (error) {
@@ -27,7 +27,7 @@ export default function MeusPostsPage() {
   const handleDeletePost = async (id: number) => {
     
     try {
-      const response = await axios.delete(`http://localhost:3001/posts/${id}`,
+      const response = await axios.delete(`https://my-blog-back-dzcr.onrender.com/${id}`,
         { withCredentials: true })
       setMyPosts(prevPosts => prevPosts.filter(post => post.post_id !== id))
     } catch (error) {

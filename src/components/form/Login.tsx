@@ -23,7 +23,7 @@ export default function Login() {
         try {
             // Axios precisa ter withCredentials para enviar e receber cookies
             const response = await axios.post(
-                "http://localhost:3001/login",
+                "https://my-blog-back-dzcr.onrender.com/login",
                 {
                     email: data.email,
                     password: data.password,

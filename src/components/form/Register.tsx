@@ -22,7 +22,7 @@ const Register = () => {
     })
 
     const onSubmit = async (data: TRegisterSchema) => {
-        const response = await axios.post('http://localhost:3001/register', data)
+        const response = await axios.post('https://my-blog-back-dzcr.onrender.com/register', data)
             .then((response) => {
                 return response.data
             })
