@@ -52,10 +52,6 @@ export default function SeguindoPage() {
               <p className="text-sm text-gray-500">@{person.user}</p>
             </div>
             <div className='flex space-x-5'>
-              {/* <button className="flex items-center gap-2 hover:cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-1 rounded text-sm transition">
-                <FaUserCheck className="text-base" />
-                Seguindo
-              </button> */}
               <button
                 onClick={() => handleUnfollow(person.userId)}
                 className="flex items-center gap-2 hover:cursor-pointer bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded text-sm transition"

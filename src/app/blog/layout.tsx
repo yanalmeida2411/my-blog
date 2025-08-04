@@ -32,7 +32,6 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
 
     const links = [
         { name: "Início", href: `/blog/${userId.toString()}` },
-        /* { name: "Produtos", href: `/blog/${userId.toString()}/produtos` }, */
         { name: "Seguidores", href: `/blog/${userId.toString()}/seguidores` },
         { name: "Seguindo", href: `/blog/${userId.toString()}/seguindo` },
         { name: "Meus Posts", href: `/blog/${userId.toString()}/meusposts` },
@@ -45,16 +44,6 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
             <nav className="fixed top-0 left-0 right-0 h-16 bg-[#00809D]  px-6 flex items-center justify-between z-50">
                 <h1 className="text-4xl font-bold text-white">BlogShop</h1>
 
-                {/* <div className="flex items-center space-x-2">
-                    <input
-                        type="text"
-                        placeholder="Buscar..."
-                        className="w-full rounded px-3 py-1 border bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#FF7601]"
-                    />
-                    <button className="bg-[#FF7601] hover:bg-[#e66f00] text-white rounded px-3 py-1 transition">
-                        Procurar
-                    </button>
-                </div> */}
 
                 <div>
                     <button

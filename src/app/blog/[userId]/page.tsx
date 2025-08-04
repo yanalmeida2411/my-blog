@@ -44,7 +44,7 @@ export default function Blog() {
         if (!userId) return;
         async function fetchFollowing() {
             try {
-                const response = await axios.get<Tfollowers[]>(`http://localhost:3001/follows/following/${userId}`, { withCredentials: true })
+                const response = await axios.get<Tfollowers[]>(`https://my-blog-back-dzcr.onrender.com/follows/following/${userId}`, { withCredentials: true })
                 const ids = response.data.map((user:Tfollowers) => user.userId) // extrai os IDs dos usuários seguidos
                 setFollowingIds(ids)
             } catch (error) {
@@ -57,7 +57,7 @@ export default function Blog() {
     // Criar post novo
     const handleCreatePost = async (data: TPostSchema) => {
         const response = await axios.post(
-            "http://localhost:3001/posts",
+            "https://my-blog-back-dzcr.onrender.com/posts",
             {
                 post_title: data.title,
                 post_resume: data.resume,
@@ -74,7 +74,7 @@ export default function Blog() {
     const handleFollow = async (authorId: number) => {
         try {
             await axios.post(
-                "http://localhost:3001/follows/follow",
+                "https://my-blog-back-dzcr.onrender.com/follows/follow",
                 { following_id: authorId },
                 { withCredentials: true }
             )

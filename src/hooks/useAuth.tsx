@@ -11,7 +11,7 @@ export function useAuth() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/profile', { withCredentials: true });
+        const res = await axios.get('https://my-blog-back-dzcr.onrender.com/profile', { withCredentials: true });
         setUserIdFromToken(res.data.userId);
         setFullname(res.data.fullname);
 
