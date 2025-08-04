@@ -12,22 +12,27 @@ export function useAuth() {
     const fetchUser = async () => {
       try {
         const res = await axios.get('https://my-blog-back-dzcr.onrender.com/profile', { withCredentials: true });
-        setUserIdFromToken(res.data.userId);
+        console.log("Resposta profile:", res.data);
+
+        const userIdFromRes = Number(res.data.userId);
+        setUserIdFromToken(userIdFromRes);
         setFullname(res.data.fullname);
 
         const segments = pathname.split('/').filter(Boolean);
+        console.log("URL segments:", segments);
 
-        // Só faz a checagem se for uma rota dentro do blog com userId
         if (segments[0] === 'blog' && segments.length > 1) {
           const userIdFromUrl = Number(segments[1]);
+          console.log("userIdFromUrl:", userIdFromUrl, typeof userIdFromUrl);
+          console.log("userIdFromRes:", userIdFromRes, typeof userIdFromRes);
 
-          if (Number(res.data.userId) !== userIdFromUrl && !isNaN(userIdFromUrl)) {
-
+          if (userIdFromRes !== userIdFromUrl && !isNaN(userIdFromUrl)) {
             alert('Acesso negado! Evite tentar acessar páginas pela URL, Você será redirecionado para sua página.');
-            router.push(`/blog/${res.data.userId}`);
+            router.push(`/blog/${userIdFromRes}`);
           }
         }
-      } catch {
+      } catch (error) {
+        console.error("Erro ao buscar perfil:", error);
         router.push('/login');
       }
     };
