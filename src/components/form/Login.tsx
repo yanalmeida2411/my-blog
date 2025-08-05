@@ -33,9 +33,6 @@ export default function Login() {
             );
 
             const { userId } = response.data;
-            const outroUserId = response.data
-            console.log(userId)
-            console.log(outroUserId)
 
             router.push(`blog/${userId}`);
         } catch (err) {
