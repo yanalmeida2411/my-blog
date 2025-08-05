@@ -7,25 +7,37 @@ const HeroSection = () => {
         <>
             <section
                 id="home"
-                className=" text-white min-h-screen flex flex-col md:flex-row items-center justify-between"
+                className="relative text-white min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-between px-4 sm:px-6 md:px-12 lg:px-20"
             >
-                <Image src="/wallpaper-man-business.avif" alt="Logo do BlogShop"
-                 width={1000} height={1000} className="absolute w-screen h-screen -z-1 object-cover  translate-y-10 " />
-                <div className="max-w-xl mb-12 md:mb-0 text-center px-6 mt-25">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white ">
-                        Conecte-se {" "}<span className="text-[#FF7601]">ao Mundo</span>
+                {/* Imagem de fundo cobrindo toda a tela */}
+                <Image
+                    src="/wallpaper-man-business.avif"
+                    alt="Logo do BlogShop"
+                    fill
+                    priority
+                    className="absolute inset-0 w-full h-full object-cover object-center -z-10"
+                />
+
+                {/* Texto */}
+                <div className="max-w-xl mb-12 md:mb-0 text-center md:text-left px-2 sm:px-6 mt-20 sm:mt-28 md:mt-0">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+                        Conecte-se{" "}
+                        <span className="text-[#FF7601]">ao Mundo</span>
                     </h1>
-                    <p className="text-lg text-white mb-8 font-bold">
+                    <p className="text-base sm:text-lg mb-8 font-bold">
                         Um espaço feito para você compartilhar suas ideias, histórias e se conectar com sua audiência através do seu próprio blog
                     </p>
 
-                    <div className="flex gap-4 items-center justify-center">
+                    <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-start justify-center">
                         <Link href="/register">
-                            <button className="bg-[#FF7601] hover:bg-[#ff7801c0] text-white hover:cursor-pointer px-6 py-3 rounded-lg font-semibold transition">
+                            <button className="bg-[#FF7601] hover:bg-[#ff7801c0] text-white px-6 py-3 rounded-lg font-semibold transition w-full sm:w-auto">
                                 Criar Conta Grátis
                             </button>
                         </Link>
-                        <a href="#beneficios" className="text-white hover:text-[#FF7601] font-bold text-lg">
+                        <a
+                            href="#beneficios"
+                            className="text-white hover:text-[#FF7601] font-bold text-lg"
+                        >
                             Ver Benefícios
                         </a>
                     </div>
