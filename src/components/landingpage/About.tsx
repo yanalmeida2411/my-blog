@@ -7,7 +7,7 @@ export default function Sobre() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 flex justify-center">
         <div className="bg-[#00809D] p-6 sm:p-10 rounded-lg border-2 border-[#FF7601] w-full">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
-            O que é o <span className="text-[#FF7601]">MyShop </span>?
+            O que é o <span className="text-[#FF7601]">MyBlog </span>?
           </h2>
           <p className="text-base sm:text-lg leading-relaxed mb-6 text-center">
             O <span className="text-[#FF7601] font-bold">MyBlog</span> é uma plataforma que permite que criadores de conteúdo

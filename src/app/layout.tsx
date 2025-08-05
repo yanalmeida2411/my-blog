@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BlogShop",
-  description: "Plataforma que permite que criadores de conteúdo compartilhem suas ideias e transformem seguidores em clientes.",
+  title: "MyBlog",
+  description: "Plataforma que permite que criadores de conteúdo compartilhem suas ideias.",
   icons: {
     icon: "/world.png",
   },
