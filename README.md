@@ -24,18 +24,3 @@ O sistema conta com **login e registro**, publicação de **posts**, sistema de 
 - **[Axios](https://axios-http.com/)** — Consumo da API.
 - **Middleware Next.js** — Proteção de rotas privadas.
 
----
-
-## 🚀 Como executar o projeto
-
-### **Pré-requisitos**
-- [Node.js](https://nodejs.org/) (>= 18)
-- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
-
----
-
-### **1. Clonar o repositório**
-```bash
-git clone https://github.com/yanalmeida2411/myblog-frontend.git
-cd myblog-frontend
-
