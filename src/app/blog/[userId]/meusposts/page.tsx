@@ -25,7 +25,7 @@ export default function MeusPostsPage() {
   }, [userId])
 
   const handleDeletePost = async (id: number) => {
-    
+
     try {
       const response = await axios.delete(`https://my-blog-back-dzcr.onrender.com/posts/${id}`,
         { withCredentials: true })
@@ -45,18 +45,29 @@ export default function MeusPostsPage() {
         myPosts.map((post: TPost) => (
           <div
             key={post.post_id}
-            className="bg-white shadow-md rounded-lg p-6 border border-gray-100 hover:shadow-lg transition"
+            className="bg-white shadow-md rounded-lg p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition"
           >
-            <h2 className="text-xl font-semibold text-[#1C1F2A]">{post.post_title}</h2>
-            <p className="text-sm text-gray-500 mb-2">
-              Publicado em {post.post_date ? formatting.format(new Date(post.post_date)) : 'Data inválida'}
+            <h2 className="text-lg sm:text-xl font-semibold text-[#1C1F2A]">
+              {post.post_title}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-500 mb-2">
+              Publicado em{" "}
+              {post.post_date
+                ? formatting.format(new Date(post.post_date))
+                : "Data inválida"}
             </p>
-            <p className="text-gray-700">{post.post_resume}</p>
-            <p className="text-gray-700 mt-5">{post.post_content}</p>
+            <p className="text-sm sm:text-base text-gray-700">
+              {post.post_resume}
+            </p>
+            <p className="text-sm sm:text-base text-gray-700 mt-3 sm:mt-5">
+              {post.post_content}
+            </p>
 
-            <div className="mt-4 flex gap-2">
-              <button onClick={() => handleDeletePost(post.post_id)}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm transition hover:cursor-pointer">
+            <div className="mt-4 flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={() => handleDeletePost(post.post_id)}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm transition hover:cursor-pointer w-full sm:w-auto"
+              >
                 Excluir
               </button>
             </div>
@@ -64,5 +75,6 @@ export default function MeusPostsPage() {
         ))
       )}
     </div>
+
   )
 }
