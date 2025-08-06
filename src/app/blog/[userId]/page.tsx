@@ -13,6 +13,7 @@ export default function Blog() {
     const { userId } = useAuth()
     const [posts, setPosts] = useState<TPost[]>([])
     const [followingIds, setFollowingIds] = useState<number[]>([])
+    const [loading, setLoading] = useState(true)
 
     const {
         register,
@@ -32,6 +33,8 @@ export default function Blog() {
                 setPosts(response.data)
             } catch (error) {
                 console.error("Erro ao buscar posts:", error)
+            } finally {
+                setLoading(false)
             }
         }
         fetchPosts()
@@ -78,6 +81,14 @@ export default function Blog() {
         }
     }
 
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-[#00809D]"></div>
+            </div>
+        )
+    }
+
     return (
         <div className="space-y-6">
             <h1 className="text-2xl md:text-3xl font-bold text-[#00809D]">Feed BlogShop</h1>
@@ -110,7 +121,7 @@ export default function Blog() {
 
                 <button
                     type="submit"
-                    className="bg-[#ff7801] hover:bg-[#cf9d71] text-white px-4 py-2 rounded text-sm transition"
+                    className="bg-[#ff7801] hover:bg-[#cf9d71] hover:cursor-pointer text-white px-4 py-2 rounded text-sm transition"
                 >
                     Publicar
                 </button>

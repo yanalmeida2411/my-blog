@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 import { FiMenu, FiX, FiLogOut, FiHome, FiUsers, FiUserCheck, FiFileText } from 'react-icons/fi'
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  const { fullname , userId } = useAuth()
+  const { fullname, userId } = useAuth()
   const router = useRouter()
 
   const currentPage = usePathname()
@@ -106,7 +106,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
 
             <button
               onClick={handleLogout}
-              className={`mt-auto flex items-center gap-3 p-2 rounded hover:bg-[#FF7601] hover:text-white transition font-semibold
+              className={`mt-auto flex items-center gap-3 p-2 rounded hover:bg-[#FF7601] hover:cursor-pointer hover:text-white transition font-semibold
                 ${!isExpanded && !isDesktop ? 'justify-center' : ''}
               `}
               title="Sair"

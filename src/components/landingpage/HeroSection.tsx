@@ -15,7 +15,7 @@ const HeroSection = () => {
                     alt="Logo do BlogShop"
                     fill
                     priority
-                    className="absolute inset-0 w-full h-full object-cover object-center -z-10"
+                    className="absolute inset-0 w-full h-full object-cover object-center -z-10 opacity-85"
                 />
 
                 {/* Texto */}
@@ -30,13 +30,13 @@ const HeroSection = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4 items-center sm:justify-start justify-center">
                         <Link href="/register">
-                            <button className="bg-[#FF7601] hover:bg-[#ff7801c0] text-white px-6 py-3 rounded-lg font-semibold transition w-full sm:w-auto">
+                            <button className="bg-[#FF7601] hover:bg-[#ff7801c0] hover:cursor-pointer text-white px-6 py-3 rounded-lg font-semibold transition w-full sm:w-auto">
                                 Criar Conta Grátis
                             </button>
                         </Link>
                         <a
                             href="#beneficios"
-                            className="text-white hover:text-[#FF7601] font-bold text-lg"
+                            className="text-white hover:text-[#FF7601] hover:cursor-pointer font-bold text-lg"
                         >
                             Ver Benefícios
                         </a>

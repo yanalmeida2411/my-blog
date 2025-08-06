@@ -1,5 +1,6 @@
 'use client'
 import { FaLock, FaUser } from 'react-icons/fa'
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import Link from 'next/link'
 import { useForm } from "react-hook-form"
 import { loginSchema, TLoginSchema } from '@/types/auth'
@@ -7,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Login() {
     const router = useRouter()
@@ -18,6 +20,7 @@ export default function Login() {
     } = useForm<TLoginSchema>({
         resolver: zodResolver(loginSchema),
     })
+    const [seePassword, setSeePassword] = useState<boolean>(false)
 
     const onSubmit = async (data: TLoginSchema) => {
         // acordar o backend
@@ -63,14 +66,18 @@ export default function Login() {
                         <p className="text-red-600 text-sm font-bold">{`${errors.email.message}`}</p>
                     )}
                     {/* Senha */}
-                    <div className="relative">
+                    <div className="relative flex items-center">
                         <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                         <input
                             {...register('password')}
-                            type="password"
+                            type={seePassword ? "text" : "password"}
                             placeholder="Senha"
                             className="w-full bg-white text-black rounded-lg py-3 pl-10 pr-4 outline-none border border-[#00809D] focus:ring-2 focus:ring-[#00809D]"
                         />
+                        <div onClick={() => setSeePassword(!seePassword)}
+                            className='absolute right-5 text-lg text-gray-400'>
+                            {seePassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </div>
                     </div>
                     {errors.password && (
                         <p className="text-red-600 text-sm font-bold">{`${errors.password.message}`}</p>

@@ -8,7 +8,9 @@ import { useAuth } from '@/hooks/useAuth'
 
 export default function SeguindoPage() {
   const [following, setFollowing] = useState<Tfollowers[]>([])
+  const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
+
 
   useEffect(() => {
     if (!userId) return;
@@ -18,6 +20,8 @@ export default function SeguindoPage() {
         setFollowing(response.data);
       } catch (error) {
         console.error('Erro ao buscar usuários seguidos:', error)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -37,18 +41,29 @@ export default function SeguindoPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-[#00809D]"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-[#00809D]">Seguindo</h1>
+      <h1 className="text-2xl font-bold text-[#00809D]">Seguindo{""} {following.length}</h1>
 
       <div className="space-y-4">
         {following.map((person: Tfollowers) => (
           <div
             key={person.userId}
-            className="bg-white shadow-md rounded-lg p-4 border border-gray-100 
+            className="bg-white shadow-md space-x-3 rounded-lg p-4 border border-gray-100 
              flex flex-col sm:flex-row sm:items-center sm:justify-between 
              gap-3 sm:gap-0 hover:shadow-lg transition"
           >
+            <div className="w-10 h-10 bg-[#FF7601] text-white rounded-full flex items-center justify-center text-lg font-bold">
+              {person.fullname && person.fullname.charAt(0).toUpperCase()}
+            </div>
             {/* Texto do usuário */}
             <div className="flex-1 text-center sm:text-left">
               <h2 className="text-lg font-semibold text-[#1C1F2A]">{person.fullname}</h2>

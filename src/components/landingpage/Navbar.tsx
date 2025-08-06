@@ -43,7 +43,7 @@ const Navbar = () => {
                             <li key={option.title}>
                                 <button
                                     onClick={() => scrollToSection(option.href)}
-                                    className="hover:text-[#FF7601] transition duration-200"
+                                    className="hover:text-[#FF7601] transition duration-200 hover:cursor-pointer"
                                 >
                                     {option.title}
                                 </button>
@@ -55,12 +55,12 @@ const Navbar = () => {
                 {/* Botões desktop */}
                 <div className="hidden md:flex items-center space-x-4">
                     <Link href="/login">
-                        <button className="text-white hover:text-[#FF7601] font-bold transition">
+                        <button className="text-white hover:text-[#FF7601] font-bold transition hover:cursor-pointer">
                             Entrar
                         </button>
                     </Link>
                     <Link href="/register">
-                        <button className="bg-[#FF7601] hover:bg-[#ff7801be] text-white px-4 py-2 rounded-lg font-semibold transition">
+                        <button className="bg-[#FF7601] hover:bg-[#ff7801be] hover:cursor-pointer text-white px-4 py-2 rounded-lg font-semibold transition">
                             Cadastre-se
                         </button>
                     </Link>

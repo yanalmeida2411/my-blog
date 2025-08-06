@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth'
 
 export default function MeusPostsPage() {
   const [myPosts, setMyPosts] = useState<TPost[]>([])
+  const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
 
   const formatting = new Intl.DateTimeFormat('pt-BR');
@@ -18,6 +19,8 @@ export default function MeusPostsPage() {
         setMyPosts(response.data)
       } catch (error) {
         console.error("Erro ao buscar posts:", error)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -35,9 +38,17 @@ export default function MeusPostsPage() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-[#00809D]"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-[#00809D]">Meus Posts</h1>
+      <h1 className="text-2xl font-bold text-[#00809D]">Meus Posts {" "} {myPosts.length}</h1>
 
       {myPosts.length === 0 ? (
         <p className="text-gray-500">Você ainda não publicou nenhum post.</p>

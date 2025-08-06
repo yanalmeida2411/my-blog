@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa'
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,6 +8,7 @@ import { registerSchema, TRegisterSchema } from '@/types/auth'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 
 const Register = () => {
@@ -20,6 +21,8 @@ const Register = () => {
     } = useForm<TRegisterSchema>({
         resolver: zodResolver(registerSchema),
     })
+    const [showPassword, setShowPassword] = useState<boolean>(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)
 
     const onSubmit = async (data: TRegisterSchema) => {
         const response = await axios.post('https://my-blog-back-dzcr.onrender.com/register', data)
@@ -75,26 +78,34 @@ const Register = () => {
                     {errors.email && (
                         <p className="text-red-600 text-sm font-bold">{`${errors.email.message}`}</p>
                     )}
-                    <div className="relative">
+                    <div className="relative flex items-center">
                         <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                         <input
                             {...register('password')}
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Senha"
                             className="w-full bg-white text-black rounded-lg py-3 pl-10 pr-4 outline-none border border-[#00809D] focus:ring-2 focus:ring-[#00809D]"
                         />
+                        <div onClick={() => setShowPassword(!showPassword)}
+                            className='absolute right-5 text-lg text-gray-400'>
+                            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </div>
                     </div>
                     {errors.password && (
                         <p className="text-red-600 text-sm font-bold">{`${errors.password.message}`}</p>
                     )}
-                    <div className="relative">
+                    <div className="relative flex items-center">
                         <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                         <input
                             {...register('confirmPassword')}
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirmar Senha"
                             className="w-full bg-white text-black rounded-lg py-3 pl-10 pr-4 outline-none border border-[#00809D] focus:ring-2 focus:ring-[#00809D]"
                         />
+                        <div onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className='absolute right-5 text-lg text-gray-400'>
+                            {showConfirmPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                        </div>
                     </div>
                     {errors.confirmPassword && (
                         <p className="text-red-600 text-sm font-bold">{`${errors.confirmPassword.message}`}</p>
