@@ -144,7 +144,7 @@ export default function Blog() {
                                     {post.post_authorName?.charAt(0).toUpperCase()}
                                 </div>
                                 <div>
-                                    <h1 className="text-lg md:text-xl font-semibold text-white">{post.post_authorName}</h1>
+                                    <h1 className="text-lg md:text-xl font-semibold text-white capitalize">{post.post_authorName}</h1>
                                     <p className="text-sm text-white">
                                         Publicado em {post.post_date && formatting.format(new Date(post.post_date))}
                                     </p>

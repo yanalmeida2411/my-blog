@@ -23,9 +23,6 @@ export default function Login() {
   })
   const [seePassword, setSeePassword] = useState<boolean>(false)
 
-  // Detecta mobile iOS/Android simples via userAgent
-  const isMobile = typeof navigator !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
   const onSubmit = async (data: TLoginSchema) => {
     try {
       const response = await axios.post(
@@ -34,15 +31,10 @@ export default function Login() {
           email: data.email,
           password: data.password,
         },
-        isMobile ? {} : { withCredentials: true } // só usa cookie se NÃO for mobile
+        { withCredentials: true } // só usa cookie se NÃO for mobile
       );
 
-      const { userId, token } = response.data;
-
-      if (isMobile && token) {
-        // salva token no localStorage no mobile para usar depois no header
-        localStorage.setItem("token", token);
-      }
+      const { userId } = response.data;
 
       router.push(`blog/${userId}`);
     } catch (err) {

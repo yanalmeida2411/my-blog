@@ -66,7 +66,7 @@ export default function SeguindoPage() {
             </div>
             {/* Texto do usuário */}
             <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-lg font-semibold text-[#1C1F2A]">{person.fullname}</h2>
+              <h2 className="text-lg font-semibold text-[#1C1F2A] capitalize">{person.fullname}</h2>
               <p className="text-sm text-gray-500">@{person.user}</p>
             </div>
 

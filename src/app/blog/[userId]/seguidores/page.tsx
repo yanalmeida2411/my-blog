@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAuth } from '@/hooks/useAuth'
 import { Tfollowers } from '@/types/Tfollowers'
+import Link from 'next/link'
 
 export default function SeguidoresPage() {
   const [seguidores, setSeguidores] = useState<Tfollowers[]>([])
@@ -54,15 +55,10 @@ export default function SeguidoresPage() {
             </div>
             {/* Texto do seguidor */}
             <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-lg font-semibold text-[#1C1F2A]">{seguidor.fullname}</h2>
+              <h2 className="text-lg font-semibold text-[#1C1F2A] capitalize">{seguidor.fullname}</h2>
               <p className="text-sm text-gray-500">@{seguidor.user}</p>
             </div>
 
-            {/* Botão */}
-            <button className="bg-[#FF7601] hover:bg-[#e66f00] text-white 
-                     px-4 py-1 rounded text-sm transition w-full sm:w-auto">
-              Ver perfil
-            </button>
           </div>
 
         ))}
