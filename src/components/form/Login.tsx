@@ -9,6 +9,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useState } from 'react'
+import { isMobile } from 'react-device-detect'
 
 export default function Login() {
   const [loading, setLoading] = useState(true)
@@ -31,10 +32,15 @@ export default function Login() {
           email: data.email,
           password: data.password,
         },
-        { withCredentials: true } // só usa cookie se NÃO for mobile
+        { withCredentials: !isMobile }
       );
 
-      const { userId } = response.data;
+      const { userId, token } = response.data;
+
+      if (isMobile && token) {
+        localStorage.setItem("token", token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
 
       router.push(`blog/${userId}`);
     } catch (err) {
