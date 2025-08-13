@@ -6,7 +6,7 @@ import Loading from '@/common/Loading'
 import Login from '@/components/form/Login'
 import { useLoadingStore } from '@/store/loadingStore'
 
-const page = () => {
+const LoginPage = () => {
   const { loading } = useLoadingStore()
   return (
     <>
@@ -35,4 +35,4 @@ const page = () => {
   )
 }
 
-export default page
+export default LoginPage
