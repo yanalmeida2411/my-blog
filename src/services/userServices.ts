@@ -1,4 +1,4 @@
-import { TLoginSchema } from "@/types/auth";
+import { TLoginSchema, TRegisterSchema } from "@/types/auth";
 import { LoginResponse } from "@/types/Tlogin";
 import axios from "axios";
 
@@ -10,7 +10,10 @@ export const userLogout = async () => {
   );
 };
 
-export const userLogin = async (data: TLoginSchema, isMobile: boolean):Promise<LoginResponse> => {
+export const userLogin = async (
+  data: TLoginSchema,
+  isMobile: boolean
+): Promise<LoginResponse> => {
   const response = await axios.post(
     "https://my-blog-back-dzcr.onrender.com/login",
     {
@@ -21,4 +24,13 @@ export const userLogin = async (data: TLoginSchema, isMobile: boolean):Promise<L
   );
 
   return response.data;
+};
+
+export const userRegister = async (data: TRegisterSchema) => {
+  const response = await axios
+    .post("https://my-blog-back-dzcr.onrender.com/register", data)
+    .then((response) => {
+      return response.data;
+    });
+    return response.data
 };

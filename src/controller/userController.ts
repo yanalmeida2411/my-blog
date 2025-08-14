@@ -1,5 +1,6 @@
-import { userLogin, userLogout } from "@/services/userServices";
+import { userLogin, userLogout, userRegister } from "@/services/userServices";
 import { useLoadingStore } from "@/store/loadingStore";
+import { TRegisterSchema } from "@/types/auth";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { isMobile } from "react-device-detect";
@@ -47,4 +48,18 @@ export const useLogin = () => {
     }
   };
   return { handleLogin };
+};
+
+export const useRegister = () => {
+  const router = useRouter();
+
+  const handleRegister = async (data: TRegisterSchema) => {
+    try {
+      await userRegister(data);
+      router.push("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return { handleRegister };
 };
