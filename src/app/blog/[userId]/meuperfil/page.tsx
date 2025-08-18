@@ -24,7 +24,7 @@ export default function MeuPerfil() {
       setLoading(false)
     }
     loadPosts()
-  }, [userId,fetchUserPosts]) // dependências corretas
+  }, [userId, fetchUserPosts, setPosts]) // dependências corretas
 
   if (loading) return (<Loading />)
 

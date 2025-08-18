@@ -4,9 +4,10 @@ import {
   handleUnfollow,
   handleFollow,
 } from "@/services/followsService";
+import { Tfollowers } from "@/types/Tfollowers";
 
 export const useFollowersController = (userId: number | null) => {
-  const getFollowers = async (): Promise<any[]> => {
+  const getFollowers = async (): Promise<Tfollowers[]> => {
     if (!userId) return [];
     try {
       return await fetchFollowers(userId);
@@ -16,7 +17,7 @@ export const useFollowersController = (userId: number | null) => {
     }
   };
 
-  const getFollowing = async (): Promise<any[]> => {
+  const getFollowing = async (): Promise<Tfollowers[]> => {
     if (!userId) return [];
     try {
       return await fetchFollowing(userId);
