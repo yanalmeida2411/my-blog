@@ -1,22 +1,4 @@
-import { FaRegLightbulb, FaUsers, FaPenFancy } from 'react-icons/fa'
-
-const benefits = [
-  {
-    icon: <FaRegLightbulb size={32} className="text-[#FF7601]" />,
-    title: 'Compartilhe Suas Ideias',
-    desc: 'Crie e publique conteúdos com facilidade usando uma plataforma feita para você.',
-  },
-  {
-    icon: <FaUsers size={32} className="text-[#FF7601]" />,
-    title: 'Construa Sua Comunidade',
-    desc: 'Aproxime-se dos seus leitores e crie conexões reais com seu público.',
-  },
-  {
-    icon: <FaPenFancy size={32} className="text-[#FF7601]" />,
-    title: 'Design Personalizável',
-    desc: 'Deixe o seu blog com a sua cara, sem precisar de conhecimento técnico.',
-  },
-]
+import { benefitsLink } from '@/constants/benefitsLink'
 
 export default function Beneficios() {
   return (
@@ -30,7 +12,7 @@ export default function Beneficios() {
         </h2>
 
         <div className="grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {benefits.map((item, index) => (
+          {benefitsLink.map((item, index) => (
             <div
               key={index}
               className="bg-[#00809D] p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border border-[#FF7601] text-center sm:text-left"
