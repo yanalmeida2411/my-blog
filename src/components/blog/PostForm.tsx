@@ -11,7 +11,6 @@ const PostForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
         reset,
     } = useForm<TPostSchema>({
         resolver: zodResolver(postSchema),

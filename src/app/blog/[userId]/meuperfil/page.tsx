@@ -9,11 +9,11 @@ import { useEffect, useState } from "react"
 
 export default function MeuPerfil() {
   const { userId, fullname } = useAuth()
-  const { setPosts } = usePostStore()
+  const { posts, setPosts } = usePostStore()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!userId) return ;
+    if (!userId) return;
     async function fetchPosts() {
       setLoading(true)
       const myPosts = await fetchUserPosts(userId)
@@ -21,7 +21,7 @@ export default function MeuPerfil() {
       setLoading(false)
     }
     fetchPosts()
-  }, [userId])
+  }, [userId, posts])
 
   if (loading) return (<Loading />)
 

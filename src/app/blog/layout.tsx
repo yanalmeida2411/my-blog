@@ -7,7 +7,7 @@ import { useResponsive } from '@/hooks/useResponsive'
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   const { userId } = useAuth();
-  const { isDesktop, isExpanded, setIsExpanded } = useResponsive();
+  const { isDesktop, isExpanded } = useResponsive();
 
   if (!userId) return null
 

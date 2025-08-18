@@ -10,7 +10,7 @@ import { FiLogOut } from 'react-icons/fi';
 
 const BlogAside = () => {
     const { fullname, userId } = useAuth();
-    const { isDesktop, isExpanded, setIsExpanded } = useResponsive();
+    const { isDesktop, isExpanded } = useResponsive();
     const currentPage = usePathname()
     const { handleLogout } = useLogout();
     const links: Tlinks[] = blogLinks(userId)
