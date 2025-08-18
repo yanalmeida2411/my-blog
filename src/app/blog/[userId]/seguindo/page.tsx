@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FaUserTimes } from 'react-icons/fa'
 import { Tfollowers } from '@/types/Tfollowers'
 import { useAuth } from '@/hooks/useAuth'
-import { fetchFollowing, handleUnfollow } from '@/controller/followsController'
+import { useFollowersController } from '@/controller/followsController'
 import Loading from '@/common/Loading'
 
 export default function SeguindoPage() {
@@ -12,25 +12,24 @@ export default function SeguindoPage() {
   const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
 
-  useEffect(() => {
-    if (!userId) return;
-    async function loadFollowing() {
-      setLoading(true);
-      const following = await fetchFollowing(userId);
-      setFollowing(following);
-      setLoading(false);
-    }
-    loadFollowing();
-  }, [userId]);
+  // Hook customizado
+  const { fetchFollowing, handleUnfollow } = useFollowersController(userId)
 
-  const handleUnfollowClick = async (followingId: number) => {
-    try {
-      await handleUnfollow(followingId);
-      setFollowing((prev) => prev.filter((user) => user.userId !== followingId));
-    } catch (error) {
-      console.error("Erro ao deixar de seguir:", error);
+  useEffect(() => {
+    if (!userId) return
+
+    async function loadFollowing() {
+      setLoading(true)
+      try {
+        const followingData = await fetchFollowing()
+        setFollowing(followingData)
+      } finally {
+        setLoading(false)
+      }
     }
-  };
+
+    loadFollowing()
+  }, [userId]) // dependências corretas
 
   if (loading) return <Loading />
 
@@ -53,7 +52,7 @@ export default function SeguindoPage() {
               <p className="text-sm text-gray-500">@{person.user}</p>
             </div>
             <button
-              onClick={() => handleUnfollowClick(person.userId)}
+              onClick={() => handleUnfollow(person.userId)}
               className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 
                text-white px-4 py-1 rounded text-sm transition w-full sm:w-auto hover:cursor-pointer"
             >

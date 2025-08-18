@@ -3,24 +3,31 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { Tfollowers } from '@/types/Tfollowers'
 import Loading from '@/common/Loading'
-import { fetchFollowers } from '@/controller/followsController'
+import { useFollowersController } from '@/controller/followsController'
 
 export default function SeguidoresPage() {
   const [seguidores, setSeguidores] = useState<Tfollowers[]>([])
   const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
 
+  // Hook customizado
+  const { fetchFollowers } = useFollowersController(userId)
+
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) return
 
     async function loadFollowers() {
-      setLoading(true);
-      const seguidores = await fetchFollowers(userId);
-      setSeguidores(seguidores);
-      setLoading(false);
+      setLoading(true)
+      try {
+        const seguidoresData = await fetchFollowers()
+        setSeguidores(seguidoresData)
+      } finally {
+        setLoading(false)
+      }
     }
-    loadFollowers();
-  }, [userId]);
+
+    loadFollowers()
+  }, [userId]) // dependências corretas
 
   if (loading) return <Loading />
 

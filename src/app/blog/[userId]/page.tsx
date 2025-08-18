@@ -2,8 +2,8 @@
 
 import Loading from "@/common/Loading"
 import PostForm from "@/components/blog/PostForm"
-import { fetchFollowing, handleFollow } from "@/controller/followsController"
-import { fetchAllPosts } from "@/controller/postController"
+import { useFollowersController } from "@/controller/followsController"
+import { usePostController } from "@/controller/postController"
 import { useAuth } from "@/hooks/useAuth"
 import { usePostStore } from "@/store/postStore"
 import { TPost } from "@/types/Tpost"
@@ -17,35 +17,41 @@ export default function Blog() {
     const [followingIds, setFollowingIds] = useState<number[]>([])
     const [loading, setLoading] = useState(true)
 
+    // Hooks customizados
+    const { fetchFollowing, handleFollow } = useFollowersController(userId)
+    const { fetchAllPosts } = usePostController()
+
+    // Carregar posts
     useEffect(() => {
         async function loadPosts() {
-            setLoading(true);
-            const allPosts = await fetchAllPosts();
-            usePostStore.getState().setPosts(allPosts);
-            setLoading(false);
+            setLoading(true)
+            const allPosts = await fetchAllPosts()
+            usePostStore.getState().setPosts(allPosts)
+            setLoading(false)
         }
-        loadPosts();
-    }, []);
+        loadPosts()
+    }, [])
 
+    // Carregar lista de quem o usuário segue
     useEffect(() => {
-        if (!userId) return;
+        if (!userId) return
         async function loadFollowing() {
-            const following = await fetchFollowing(userId);
-            const ids = following.map(f => f.userId);
-            setFollowingIds(ids);
+            const following = await fetchFollowing()
+            const ids = following.map(f => f.userId)
+            setFollowingIds(ids)
         }
-        loadFollowing();
-    }, [userId]);
+        loadFollowing()
+    }, [userId])
 
-
+    // Seguir usuário
     const handleFollowUser = async (authorId: number) => {
         try {
-            await handleFollow(authorId); // controller
-            setFollowingIds((prev) => [...prev, authorId]);
+            await handleFollow(authorId)
+            setFollowingIds(prev => [...prev, authorId])
         } catch (error) {
-            console.error("Erro ao seguir usuário:", error);
+            console.error("Erro ao seguir usuário:", error)
         }
-    };
+    }
 
     if (loading) return <Loading />
 

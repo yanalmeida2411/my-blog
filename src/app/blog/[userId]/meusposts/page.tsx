@@ -4,33 +4,29 @@ import { TPost } from '@/types/Tpost'
 import { useAuth } from '@/hooks/useAuth'
 import { formatting } from '@/utils/dateFormat'
 import Loading from '@/common/Loading'
-import { deleteUserPost, fetchMyPosts } from '@/controller/postController'
+import { usePostController } from '@/controller/postController'
 
 export default function MeusPostsPage() {
   const [myPosts, setMyPosts] = useState<TPost[]>([])
   const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
 
-  useEffect(() => {
-    async function loadPosts() {
-      if (!userId) return ;
+  // Hook customizado
+  const { fetchMyPosts, deleteUserPost } = usePostController()
 
-      setLoading(true);
+  useEffect(() => {
+    if (!userId) return
+    async function loadPosts() {
+      setLoading(true)
       try {
-        const posts = await fetchMyPosts(userId);
-        setMyPosts(posts);
+        const posts = await fetchMyPosts(userId)
+        setMyPosts(posts)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
-    loadPosts();
-  }, [userId]);
-
-  const handleDeletePost = async (id: number) => {
-    await deleteUserPost(id);
-    setMyPosts(prev => prev.filter(post => post.post_id !== id)); // atualiza a lista local
-  };
-
+    loadPosts()
+  }, [userId]) // dependências corretas
   if (loading) return <Loading />
 
   return (
@@ -61,7 +57,7 @@ export default function MeusPostsPage() {
 
             <div className="mt-4 flex flex-col sm:flex-row gap-2">
               <button
-                onClick={() => handleDeletePost(post.post_id)}
+                onClick={() => deleteUserPost(post.post_id)}
                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm transition hover:cursor-pointer w-full sm:w-auto"
               >
                 Excluir

@@ -1,4 +1,4 @@
-import { createPost } from '@/controller/postController'
+import { usePostController } from '@/controller/postController'
 import { usePostStore } from '@/store/postStore'
 import { postSchema, TPostSchema } from '@/types/Tpost'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form'
 
 const PostForm = () => {
     const { posts, setPosts } = usePostStore()
+
+    const { createPost } = usePostController()
 
     const {
         register,

@@ -2,7 +2,7 @@
 
 import Loading from "@/common/Loading"
 import MyProfile from "@/components/blog/MyProfile"
-import { fetchUserPosts } from "@/controller/postController"
+import { usePostController } from "@/controller/postController"
 import { useAuth } from "@/hooks/useAuth"
 import { usePostStore } from "@/store/postStore"
 import { useEffect, useState } from "react"
@@ -12,16 +12,19 @@ export default function MeuPerfil() {
   const { posts, setPosts } = usePostStore()
   const [loading, setLoading] = useState(false)
 
+  // Hook customizado
+  const { fetchUserPosts } = usePostController()
+
   useEffect(() => {
-    if (!userId) return;
-    async function fetchPosts() {
+    if (!userId) return
+    async function loadPosts() {
       setLoading(true)
       const myPosts = await fetchUserPosts(userId)
       setPosts(myPosts)
       setLoading(false)
     }
-    fetchPosts()
-  }, [userId, posts])
+    loadPosts()
+  }, [userId]) // dependências corretas
 
   if (loading) return (<Loading />)
 
