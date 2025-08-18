@@ -1,43 +1,43 @@
 import {
-  useFetchFollowers,
-  useFetchFollowing,
-  useHandleFollow,
-  useHandleUnfollow,
+  fetchFollowers,
+  fetchFollowing,
+  handleUnfollow,
+  handleFollow,
 } from "@/services/followsService";
 
 export const useFollowersController = (userId: number | null) => {
-  const fetchFollowers = async (): Promise<any[]> => {
+  const getFollowers = async (): Promise<any[]> => {
     if (!userId) return [];
     try {
-      return await useFetchFollowers(userId);
+      return await fetchFollowers(userId);
     } catch (error) {
       console.error("Erro ao buscar seguidores:", error);
       return [];
     }
   };
 
-  const fetchFollowing = async (): Promise<any[]> => {
+  const getFollowing = async (): Promise<any[]> => {
     if (!userId) return [];
     try {
-      return await useFetchFollowing(userId);
+      return await fetchFollowing(userId);
     } catch (error) {
       console.error("Erro ao buscar seguindo:", error);
       return [];
     }
   };
 
-  const handleFollow = async (followingId: number) => {
+  const newFollow = async (followingId: number) => {
     try {
-      return await useHandleFollow(followingId);
+      return await handleFollow(followingId);
     } catch (error) {
       console.error("Erro ao seguir usuário:", error);
       throw error;
     }
   };
 
-  const handleUnfollow = async (followingId: number) => {
+  const newUnfollow = async (followingId: number) => {
     try {
-      return await useHandleUnfollow(followingId);
+      return await handleUnfollow(followingId);
     } catch (error) {
       console.error("Erro ao deixar de seguir:", error);
       throw error;
@@ -45,9 +45,9 @@ export const useFollowersController = (userId: number | null) => {
   };
 
   return {
-    fetchFollowers,
-    fetchFollowing,
-    handleFollow,
-    handleUnfollow,
+    getFollowers,
+    getFollowing,
+    newFollow,
+    newUnfollow,
   };
 };

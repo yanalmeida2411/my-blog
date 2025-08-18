@@ -1,9 +1,9 @@
 // src/hooks/usePostController.ts
 import {
-  useCreatePost,
-  useDeletePost,
-  useFetchMyPosts,
-  useGetPost,
+  createPost,
+  deletePost,
+  fetchMyPosts,
+  getPosts,
 } from "@/services/postService";
 import { usePostStore } from "@/store/postStore";
 import { TPost, TPostSchema } from "@/types/Tpost";
@@ -11,7 +11,7 @@ import { TPost, TPostSchema } from "@/types/Tpost";
 export const usePostController = () => {
   const fetchAllPosts = async (): Promise<TPost[]> => {
     try {
-      return await useGetPost();
+      return await getPosts();
     } catch (error) {
       console.error("Erro ao buscar posts:", error);
       return [];
@@ -21,7 +21,7 @@ export const usePostController = () => {
   const fetchUserPosts = async (userId: number | null): Promise<TPost[]> => {
     if (!userId) return [];
     try {
-      const posts = await useGetPost();
+      const posts = await getPosts();
       return posts.filter((post) => post.post_authorId === userId);
     } catch (error) {
       console.error("Erro ao buscar posts do usuário:", error);
@@ -29,10 +29,10 @@ export const usePostController = () => {
     }
   };
 
-  const fetchMyPosts = async (userId: number | null): Promise<TPost[]> => {
+  const getMyPosts = async (userId: number | null): Promise<TPost[]> => {
     if (!userId) return [];
     try {
-      return await useFetchMyPosts(userId);
+      return await fetchMyPosts(userId);
     } catch (error) {
       console.error("Erro ao buscar meus posts:", error);
       return [];
@@ -41,16 +41,16 @@ export const usePostController = () => {
 
   const deleteUserPost = async (postId: number) => {
     try {
-      await useDeletePost(postId);
+      await deletePost(postId);
       usePostStore.getState().removePost(postId);
     } catch (error) {
       console.error("Erro ao deletar o post:", error);
     }
   };
 
-  const createPost = async (data: TPostSchema) => {
+  const newPost = async (data: TPostSchema) => {
     try {
-      return await useCreatePost(data);
+      return await createPost(data);
     } catch (error) {
       console.error("Erro ao criar post:", error);
       return null;
@@ -60,8 +60,8 @@ export const usePostController = () => {
   return {
     fetchAllPosts,
     fetchUserPosts,
-    fetchMyPosts,
+    getMyPosts,
     deleteUserPost,
-    createPost,
+    newPost,
   };
 };

@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 const PostForm = () => {
     const { posts, setPosts } = usePostStore()
 
-    const { createPost } = usePostController()
+    const { newPost } = usePostController()
 
     const {
         register,
@@ -19,9 +19,9 @@ const PostForm = () => {
     })
 
     const handleCreatePost = async (data: TPostSchema) => {
-        const newPost = await createPost(data);
-        if (newPost) {
-            setPosts([newPost, ...posts]);
+        const posting = await newPost(data);
+        if (posting) {
+            setPosts([posting, ...posts]);
             reset();
         }
     };

@@ -18,7 +18,7 @@ export default function Blog() {
     const [loading, setLoading] = useState(true)
 
     // Hooks customizados
-    const { fetchFollowing, handleFollow } = useFollowersController(userId)
+    const { getFollowing, newFollow } = useFollowersController(userId)
     const { fetchAllPosts } = usePostController()
 
     // Carregar posts
@@ -36,7 +36,7 @@ export default function Blog() {
     useEffect(() => {
         if (!userId) return
         async function loadFollowing() {
-            const following = await fetchFollowing()
+            const following = await getFollowing()
             const ids = following.map(f => f.userId)
             setFollowingIds(ids)
         }
@@ -46,7 +46,7 @@ export default function Blog() {
     // Seguir usuário
     const handleFollowUser = async (authorId: number) => {
         try {
-            await handleFollow(authorId)
+            await newFollow(authorId)
             setFollowingIds(prev => [...prev, authorId])
         } catch (error) {
             console.error("Erro ao seguir usuário:", error)

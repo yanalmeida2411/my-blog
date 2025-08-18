@@ -11,7 +11,7 @@ export default function SeguidoresPage() {
   const { userId } = useAuth()
 
   // Hook customizado
-  const { fetchFollowers } = useFollowersController(userId)
+  const { getFollowers } = useFollowersController(userId)
 
   useEffect(() => {
     if (!userId) return
@@ -19,7 +19,7 @@ export default function SeguidoresPage() {
     async function loadFollowers() {
       setLoading(true)
       try {
-        const seguidoresData = await fetchFollowers()
+        const seguidoresData = await getFollowers()
         setSeguidores(seguidoresData)
       } finally {
         setLoading(false)

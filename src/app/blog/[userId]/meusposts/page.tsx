@@ -12,14 +12,14 @@ export default function MeusPostsPage() {
   const { userId } = useAuth()
 
   // Hook customizado
-  const { fetchMyPosts, deleteUserPost } = usePostController()
+  const { getMyPosts, deleteUserPost } = usePostController()
 
   useEffect(() => {
     if (!userId) return
     async function loadPosts() {
       setLoading(true)
       try {
-        const posts = await fetchMyPosts(userId)
+        const posts = await getMyPosts(userId)
         setMyPosts(posts)
       } finally {
         setLoading(false)

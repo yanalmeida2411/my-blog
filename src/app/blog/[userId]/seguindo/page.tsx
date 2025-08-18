@@ -13,7 +13,7 @@ export default function SeguindoPage() {
   const { userId } = useAuth()
 
   // Hook customizado
-  const { fetchFollowing, handleUnfollow } = useFollowersController(userId)
+  const { getFollowing, newUnfollow } = useFollowersController(userId)
 
   useEffect(() => {
     if (!userId) return
@@ -21,7 +21,7 @@ export default function SeguindoPage() {
     async function loadFollowing() {
       setLoading(true)
       try {
-        const followingData = await fetchFollowing()
+        const followingData = await getFollowing()
         setFollowing(followingData)
       } finally {
         setLoading(false)
@@ -52,7 +52,7 @@ export default function SeguindoPage() {
               <p className="text-sm text-gray-500">@{person.user}</p>
             </div>
             <button
-              onClick={() => handleUnfollow(person.userId)}
+              onClick={() => newUnfollow(person.userId)}
               className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 
                text-white px-4 py-1 rounded text-sm transition w-full sm:w-auto hover:cursor-pointer"
             >
