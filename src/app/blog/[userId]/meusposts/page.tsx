@@ -26,7 +26,8 @@ export default function MeusPostsPage() {
       }
     }
     loadPosts()
-  }, [userId]) // dependências corretas
+  }, [userId])
+
   if (loading) return <Loading />
 
   return (
@@ -57,7 +58,10 @@ export default function MeusPostsPage() {
 
             <div className="mt-4 flex flex-col sm:flex-row gap-2">
               <button
-                onClick={() => deleteUserPost(post.post_id)}
+                onClick={async () => {
+                  await deleteUserPost(post.post_id)
+                  setMyPosts((prevPosts) => prevPosts.filter(p => p.post_id !== post.post_id))
+                }}
                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm transition hover:cursor-pointer w-full sm:w-auto"
               >
                 Excluir
