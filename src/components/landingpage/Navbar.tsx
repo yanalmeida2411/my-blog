@@ -29,6 +29,8 @@ const Navbar = () => {
                 <div className='flex items-center'>
                     <div className="w-12 h-12 flex justify-center">
                         <Image
+                            width={100}
+                            height={100}
                             src="/world.png"
                             alt="Ilustração de produtos e blog"
                             className="w-full h-auto"

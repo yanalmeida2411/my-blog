@@ -29,7 +29,7 @@ export default function SeguindoPage() {
     }
 
     loadFollowing()
-  }, [userId,getFollowing]) // dependências corretas
+  }, [userId]) // dependências corretas
 
   if (loading) return <Loading />
 

@@ -27,7 +27,7 @@ export default function SeguidoresPage() {
     }
 
     loadFollowers()
-  }, [userId,getFollowers]) // dependências corretas
+  }, [userId]) // dependências corretas
 
   if (loading) return <Loading />
 

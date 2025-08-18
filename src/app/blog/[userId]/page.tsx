@@ -30,7 +30,7 @@ export default function Blog() {
             setLoading(false)
         }
         loadPosts()
-    }, [fetchAllPosts])
+    }, [])
 
     // Carregar lista de quem o usuário segue
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Blog() {
             setFollowingIds(ids)
         }
         loadFollowing()
-    }, [userId,getFollowing])
+    }, [userId])
 
     // Seguir usuário
     const handleFollowUser = async (authorId: number) => {

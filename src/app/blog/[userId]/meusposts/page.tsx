@@ -26,7 +26,7 @@ export default function MeusPostsPage() {
       }
     }
     loadPosts()
-  }, [userId,getMyPosts]) // dependências corretas
+  }, [userId]) // dependências corretas
   if (loading) return <Loading />
 
   return (
