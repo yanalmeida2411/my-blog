@@ -13,7 +13,7 @@ export default function MeuPerfil() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (userId === null) return;
+    if (!userId) return ;
     async function fetchPosts() {
       setLoading(true)
       const myPosts = await fetchUserPosts(userId)

@@ -9,3 +9,22 @@ export const useGetPost = async () => {
 
   return response.data;
 };
+
+export const useDeletePost = async (postId: number) => {
+  const response = await axios.delete(
+    `https://my-blog-back-dzcr.onrender.com/posts/${postId}`,
+    { withCredentials: true }
+  );
+
+  return response.data;
+};
+
+export const useFetchMyPosts = async (
+  userId: number | null
+): Promise<TPost[]> => {
+  const response = await axios.get(
+    `https://my-blog-back-dzcr.onrender.com/posts/author/${userId}`,
+    { withCredentials: true }
+  );
+  return response.data;
+};

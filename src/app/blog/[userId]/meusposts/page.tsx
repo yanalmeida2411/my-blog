@@ -1,50 +1,37 @@
 'use client'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { TPost } from '@/types/Tpost'
 import { useAuth } from '@/hooks/useAuth'
+import { formatting } from '@/utils/dateFormat'
+import Loading from '@/common/Loading'
+import { deleteUserPost, fetchMyPosts } from '@/controller/postController'
 
 export default function MeusPostsPage() {
   const [myPosts, setMyPosts] = useState<TPost[]>([])
   const [loading, setLoading] = useState(true)
   const { userId } = useAuth()
 
-  const formatting = new Intl.DateTimeFormat('pt-BR');
-
   useEffect(() => {
-    async function fetchPosts() {
+    async function loadPosts() {
+      if (!userId) return ;
+
+      setLoading(true);
       try {
-        const response = await axios.get(`https://my-blog-back-dzcr.onrender.com/posts/author/${userId}`,
-          { withCredentials: true })
-        setMyPosts(response.data)
-      } catch (error) {
-        console.error("Erro ao buscar posts:", error)
+        const posts = await fetchMyPosts(userId);
+        setMyPosts(posts);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
-
-    fetchPosts()
-  }, [userId])
+    loadPosts();
+  }, [userId]);
 
   const handleDeletePost = async (id: number) => {
+    await deleteUserPost(id);
+    setMyPosts(prev => prev.filter(post => post.post_id !== id)); // atualiza a lista local
+  };
 
-    try {
-      const response = await axios.delete(`https://my-blog-back-dzcr.onrender.com/posts/${id}`,
-        { withCredentials: true })
-      setMyPosts(prevPosts => prevPosts.filter(post => post.post_id !== id))
-    } catch (error) {
-      console.error("Erro ao deletar o post:", error)
-    }
-  }
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-[#00809D]"></div>
-      </div>
-    )
-  }
+  if (loading) return <Loading />
 
   return (
     <div className="space-y-6">
@@ -63,9 +50,7 @@ export default function MeusPostsPage() {
             </h2>
             <p className="text-xs sm:text-sm text-gray-500 mb-2">
               Publicado em{" "}
-              {post.post_date
-                ? formatting.format(new Date(post.post_date))
-                : "Data inválida"}
+              {post.post_date && formatting.format(new Date(post.post_date))}
             </p>
             <p className="text-sm sm:text-base text-gray-700">
               {post.post_resume}
