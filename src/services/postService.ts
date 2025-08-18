@@ -28,3 +28,13 @@ export const useFetchMyPosts = async (
   );
   return response.data;
 };
+
+export const useFetchFollowers = async (userId: number | null) => {
+  if (!userId) return [];
+
+  const response = await axios.get(
+    `https://my-blog-back-dzcr.onrender.com/follows/followers/${userId}`,
+    { withCredentials: true }
+  );
+  return response.data;
+};

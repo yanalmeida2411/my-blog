@@ -1,5 +1,6 @@
 import {
   useDeletePost,
+  useFetchFollowers,
   useFetchMyPosts,
   useGetPost,
 } from "@/services/postService";
@@ -39,6 +40,17 @@ export const fetchMyPosts = async (userId: number | null) => {
     return posts;
   } catch (error) {
     console.error("Erro ao buscar meus posts:", error);
+    return [];
+  }
+};
+
+export const fetchFollowers = async (userId: number | null) => {
+  if (!userId) return [];
+
+  try {
+    return await useFetchFollowers(userId);
+  } catch (error) {
+    console.error("Erro ao buscar seguidores:", error);
     return [];
   }
 };
