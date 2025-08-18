@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { Tfollowers } from '@/types/Tfollowers'
 import Loading from '@/common/Loading'
-import { fetchFollowers } from '@/controller/postController'
+import { fetchFollowers } from '@/controller/followsController'
 
 export default function SeguidoresPage() {
   const [seguidores, setSeguidores] = useState<Tfollowers[]>([])

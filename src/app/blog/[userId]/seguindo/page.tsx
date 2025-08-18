@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FaUserTimes } from 'react-icons/fa'
 import { Tfollowers } from '@/types/Tfollowers'
 import { useAuth } from '@/hooks/useAuth'
-import { fetchFollowing, handleUnfollow } from '@/controller/postController'
+import { fetchFollowing, handleUnfollow } from '@/controller/followsController'
 import Loading from '@/common/Loading'
 
 export default function SeguindoPage() {
@@ -55,7 +55,7 @@ export default function SeguindoPage() {
             <button
               onClick={() => handleUnfollowClick(person.userId)}
               className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 
-               text-white px-4 py-1 rounded text-sm transition w-full sm:w-auto"
+               text-white px-4 py-1 rounded text-sm transition w-full sm:w-auto hover:cursor-pointer"
             >
               <FaUserTimes className="text-base" />
               Deixar de seguir

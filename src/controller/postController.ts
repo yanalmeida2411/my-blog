@@ -1,13 +1,20 @@
 import {
+  useCreatePost,
   useDeletePost,
-  useFetchFollowers,
-  useFetchFollowing,
   useFetchMyPosts,
   useGetPost,
-  useHandleUnfollow,
 } from "@/services/postService";
 import { usePostStore } from "@/store/postStore";
-import { TPost } from "@/types/Tpost";
+import { TPost, TPostSchema } from "@/types/Tpost";
+
+export const fetchAllPosts = async (): Promise<TPost[]> => {
+  try {
+    return await useGetPost();
+  } catch (error) {
+    console.error("Erro ao buscar posts:", error);
+    return [];
+  }
+};
 
 export const fetchUserPosts = async (
   userId: number | null
@@ -36,7 +43,6 @@ export const deleteUserPost = async (postId: number) => {
 };
 
 export const fetchMyPosts = async (userId: number | null) => {
-
   try {
     const posts = await useFetchMyPosts(userId);
     return posts;
@@ -46,33 +52,11 @@ export const fetchMyPosts = async (userId: number | null) => {
   }
 };
 
-export const fetchFollowers = async (userId: number | null) => {
-  if (!userId) return [];
-
+export const createPost = async (data: TPostSchema) => {
   try {
-    return await useFetchFollowers(userId);
+    return await useCreatePost(data);
   } catch (error) {
-    console.error("Erro ao buscar seguidores:", error);
-    return [];
-  }
-};
-
-export const fetchFollowing = async (userId: number | null) => {
-  if (!userId) return [];
-
-  try {
-    return await useFetchFollowing(userId);
-  } catch (error) {
-    console.error("Erro ao buscar seguindo:", error);
-    return [];
-  }
-};
-
-export const handleUnfollow = async (followingId: number) => {
-  try {
-    return await useHandleUnfollow(followingId);
-  } catch (error) {
-    console.error("Erro ao deixar de seguir:", error);
-    throw error; 
+    console.error("Erro ao criar post:", error);
+    return null;
   }
 };

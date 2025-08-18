@@ -1,5 +1,4 @@
-import { Tfollowers } from "@/types/Tfollowers";
-import { TPost } from "@/types/Tpost";
+import { TPost, TPostSchema } from "@/types/Tpost";
 import axios from "axios";
 
 export const useGetPost = async () => {
@@ -30,28 +29,14 @@ export const useFetchMyPosts = async (
   return response.data;
 };
 
-export const useFetchFollowers = async (userId: number | null) => {
-  if (!userId) return [];
-
-  const response = await axios.get(
-    `https://my-blog-back-dzcr.onrender.com/follows/followers/${userId}`,
-    { withCredentials: true }
-  );
-  return response.data;
-};
-
-export const useFetchFollowing = async (userId: number | null) => {
-  const response = await axios.get<Tfollowers[]>(
-    `https://my-blog-back-dzcr.onrender.com/follows/following/${userId}`,
-    { withCredentials: true }
-  );
-  return response.data;
-};
-
-export const useHandleUnfollow = async (followingId: number) => {
+export const useCreatePost = async (data: TPostSchema) => {
   const response = await axios.post(
-    "https://my-blog-back-dzcr.onrender.com/follows/unfollow",
-    { following_id: followingId },
+    "https://my-blog-back-dzcr.onrender.com/posts",
+    {
+      post_title: data.title,
+      post_resume: data.resume,
+      post_content: data.content,
+    },
     { withCredentials: true }
   );
   return response.data;
