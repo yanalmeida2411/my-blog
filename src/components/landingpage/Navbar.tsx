@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const options = [
     { title: 'Home', href: 'home' },
@@ -27,7 +28,7 @@ const Navbar = () => {
                 {/* Logo */}
                 <div className='flex items-center'>
                     <div className="w-12 h-12 flex justify-center">
-                        <img
+                        <Image
                             src="/world.png"
                             alt="Ilustração de produtos e blog"
                             className="w-full h-auto"

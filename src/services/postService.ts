@@ -18,7 +18,7 @@ export const deletePost = async (postId: number) => {
 };
 
 export const fetchMyPosts = async (userId: number | null): Promise<TPost[]> => {
-  const response = await axios.get(
+  const response = await axios.get<TPost[]>(
     `https://my-blog-back-dzcr.onrender.com/posts/author/${userId}`,
     { withCredentials: true }
   );

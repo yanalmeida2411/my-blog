@@ -14,7 +14,7 @@ export const useResponsive = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setIsExpanded, setIsDesktop]);
 
   return { isDesktop, isExpanded, setIsExpanded, setIsDesktop };
 };

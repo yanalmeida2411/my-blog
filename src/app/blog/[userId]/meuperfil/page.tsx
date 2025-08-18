@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 
 export default function MeuPerfil() {
   const { userId, fullname } = useAuth()
-  const { posts, setPosts } = usePostStore()
+  const { setPosts } = usePostStore()
   const [loading, setLoading] = useState(false)
 
   // Hook customizado
@@ -24,7 +24,7 @@ export default function MeuPerfil() {
       setLoading(false)
     }
     loadPosts()
-  }, [userId]) // dependências corretas
+  }, [userId,fetchUserPosts]) // dependências corretas
 
   if (loading) return (<Loading />)
 
